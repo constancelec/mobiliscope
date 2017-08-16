@@ -12,6 +12,7 @@
    
    <script src="js/loads.js"></script>
    <script src="js/popups.js"></script>
+   <script src="js/bowser.min.js"></script>
   
   <link rel="icon" href="Pictos/favicon.png">
   <link rel="stylesheet" type="text/css" href="style.css">
@@ -22,10 +23,10 @@
  
 <div id="container">
 
-	<div id= "alerte">
-		<p>WARNING</p>
+	<div id= "alerte" style = "text-align: center;">
+		<h3>WARNING</h3>
 		<p>This website has been optimized for <strong>Firefox</strong>, <strong>Chrome</strong> and <strong>Opera</strong>. Please check your browser.</p>
-		<p><span style = "font-size : 1vw ;">Click to access website</span></p>
+		<p><span style = "font-size : 1vw ;">Click to still access website</span></p>
 	</div>
 
 	<div id= "titre">
@@ -117,7 +118,16 @@
  
 <script>
 // ALERT MESSAGE
-$(window).ready(function() { $("#alerte").css('display', 'block') }) ;
+function showBrowserModal() {
+	if (bowser.gecko || bowser.blink){
+		// Si Firefox, Chrome ou Opera, on n'affiche rien
+		// gecko : firefox
+		// blink : chrome, opera, android 
+	} else { // Sinon, on affiche le message de navigateur recommandé
+		$("#alerte").css('display', 'block')
+	}
+}
+$(window).ready(showBrowserModal) ;
 $("body").click(function(){ $("#alerte").css('display', 'none') }) ;
 
 // ACCORDION
